@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monika's Kitchen Reviews</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="auth-buttons" id="authButtons">
+        <button onclick="showModal('loginModal')">Login</button>
+        <button onclick="showModal('registerModal')">Register</button>
+      </div>
+      <h1>Monika's Kitchen Reviews</h1>
+      <p>Share your dining experiences!</p>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="hideModal('loginModal')"
+          >&times;</span
+        >
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+          <input
+            type="text"
+            id="loginUsername"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+            required
+          />
+          <div class="error-message" id="loginError"></div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="hideModal('registerModal')"
+          >&times;</span
+        >
+        <h2>Register</h2>
+        <form id="registerForm" onsubmit="handleRegister(event)">
+          <input
+            type="text"
+            id="registerUsername"
+            placeholder="Username"
+            required
+          />
+          <input
+            type="password"
+            id="registerPassword"
+            placeholder="Password"
+            required
+          />
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            required
+          />
+          <input type="file" id="profilePicture" accept="image/*" />
+          <div class="error-message" id="registerError"></div>
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- New Post Button -->
+    <div class="new-post-button" onclick="showNewPostForm()">+</div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+      <!-- Review Form Modal -->
+      <div class="modal-overlay" id="newPostOverlay"></div>
+      <div class="review-form-modal" id="newPostForm">
+        <span class="close-button" onclick="hideNewPostForm()">&times;</span>
+        <h2>Write a Review</h2>
+        <form onsubmit="handleReviewSubmit(event)">
+          <select id="category" required>
+            <option value="">Select Category</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Dessert">Dessert</option>
+          </select>
+          <input type="text" id="dishName" placeholder="Dish Name" required />
+          <select id="rating" required>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+          </select>
+          <input type="file" id="reviewImage" accept="image/*" />
+          <textarea
+            id="reviewText"
+            placeholder="Write your review..."
+            required
+          ></textarea>
+          <button type="submit">Post Review</button>
+        </form>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="category-filter" id="categoryFilter">
+        <button
+          class="category-button active"
+          data-category="all"
+          onclick="filterReviews('all')"
+        >
+          All
+        </button>
+        <button
+          class="category-button"
+          data-category="Breakfast"
+          onclick="filterReviews('Breakfast')"
+        >
+          Breakfast
+        </button>
+        <button
+          class="category-button"
+          data-category="Lunch"
+          onclick="filterReviews('Lunch')"
+        >
+          Lunch
+        </button>
+        <button
+          class="category-button"
+          data-category="Dinner"
+          onclick="filterReviews('Dinner')"
+        >
+          Dinner
+        </button>
+        <button
+          class="category-button"
+          data-category="Dessert"
+          onclick="filterReviews('Dessert')"
+        >
+          Dessert
+        </button>
+      </div>
+
+      <!-- Reviews Container -->
+      <div id="reviewsContainer"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
